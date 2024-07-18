@@ -9,9 +9,9 @@ namespace MusicAPI.Models
         [Key]
         public int Id { get; set; }
 
-
         // [ForeignKey(nameof(Artist))]
         // public int ArtistID { get; set; }
+
         // Navigation properties
         public ICollection<Artist> Artist { get; set; }
 
