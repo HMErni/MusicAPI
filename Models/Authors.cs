@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace MusicAPI.Models
@@ -8,11 +9,15 @@ namespace MusicAPI.Models
         [Key]
         public int Id { get; set; }
 
+
+        // [ForeignKey(nameof(Artist))]
+        // public int ArtistID { get; set; }
+        // Navigation properties
+        public ICollection<Artist> Artist { get; set; }
+
+       // Navigation properties
         public ICollection<Music> Music { get; set; }
-
-        public int ArtistID { get; set; }
-        public Artist Artist { get; set; }
-
+        // Navigation properties
         public ICollection<Album> Album { get; set; }   
  
     }

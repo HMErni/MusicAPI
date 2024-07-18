@@ -11,7 +11,7 @@ using MusicAPI.Data;
 namespace MusicAPI.Migrations
 {
     [DbContext(typeof(MusicContext))]
-    [Migration("20240717082731_InitMusicMigration")]
+    [Migration("20240718015956_InitMusicMigration")]
     partial class InitMusicMigration
     {
         /// <inheritdoc />
@@ -39,6 +39,21 @@ namespace MusicAPI.Migrations
                     b.ToTable("AlbumAuthors");
                 });
 
+            modelBuilder.Entity("AlbumMusic", b =>
+                {
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MusicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlbumId", "MusicId");
+
+                    b.HasIndex("MusicId");
+
+                    b.ToTable("AlbumMusic");
+                });
+
             modelBuilder.Entity("MusicAPI.Models.Album", b =>
                 {
                     b.Property<int>("Id")
@@ -47,16 +62,11 @@ namespace MusicAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("MusicId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MusicId");
 
                     b.ToTable("Albums");
                 });
@@ -69,11 +79,16 @@ namespace MusicAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorsId");
 
                     b.ToTable("Artists");
                 });
@@ -86,12 +101,7 @@ namespace MusicAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArtistID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ArtistID");
 
                     b.ToTable("Authors");
                 });
@@ -155,26 +165,30 @@ namespace MusicAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MusicAPI.Models.Album", b =>
+            modelBuilder.Entity("AlbumMusic", b =>
                 {
-                    b.HasOne("MusicAPI.Models.Music", "Music")
+                    b.HasOne("MusicAPI.Models.Album", null)
+                        .WithMany()
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicAPI.Models.Music", null)
                         .WithMany()
                         .HasForeignKey("MusicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Music");
                 });
 
-            modelBuilder.Entity("MusicAPI.Models.Authors", b =>
+            modelBuilder.Entity("MusicAPI.Models.Artist", b =>
                 {
-                    b.HasOne("MusicAPI.Models.Artist", "Artist")
-                        .WithMany("Authors")
-                        .HasForeignKey("ArtistID")
+                    b.HasOne("MusicAPI.Models.Authors", "Authors")
+                        .WithMany("Artist")
+                        .HasForeignKey("AuthorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Artist");
+                    b.Navigation("Authors");
                 });
 
             modelBuilder.Entity("MusicAPI.Models.Music", b =>
@@ -196,13 +210,10 @@ namespace MusicAPI.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("MusicAPI.Models.Artist", b =>
-                {
-                    b.Navigation("Authors");
-                });
-
             modelBuilder.Entity("MusicAPI.Models.Authors", b =>
                 {
+                    b.Navigation("Artist");
+
                     b.Navigation("Music");
                 });
 

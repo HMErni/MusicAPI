@@ -16,5 +16,8 @@ namespace MusicAPI.Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Music> Musics { get; set; }
 
+        // protected override void OnModelCreating(ModelBuilder modelBuilder){
+            
+        // }
     }
 }

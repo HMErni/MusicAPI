@@ -10,6 +10,7 @@ namespace MusicAPI.Models
         [Required]
         public string Name { get; set; }
         
-        public ICollection<Authors> Authors { get; set; }
+        // Navigation properties
+        public Authors Authors { get; set; }
     }
 }

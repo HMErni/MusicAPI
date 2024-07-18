@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicAPI.Models
 {
@@ -10,10 +11,13 @@ namespace MusicAPI.Models
         [Required]
         public string Name { get; set; }
         
+        //Navigation properties
+        public ICollection<Music> Music { get; set; }
 
-        public Music Music { get; set; }   
 
+        //Navigation properties
         public ICollection<Authors> Authors{ get; set; }
         
     }
+
 }

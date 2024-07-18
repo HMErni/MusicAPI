@@ -135,3 +135,4 @@ C:\_ERNI-Hero\MusicAPI\obj\Debug\net8.0\refint\MusicAPI.dll
 C:\_ERNI-Hero\MusicAPI\obj\Debug\net8.0\MusicAPI.pdb
 C:\_ERNI-Hero\MusicAPI\obj\Debug\net8.0\MusicAPI.genruntimeconfig.cache
 C:\_ERNI-Hero\MusicAPI\obj\Debug\net8.0\ref\MusicAPI.dll
+C:\_ERNI-Hero\MusicAPI\obj\Debug\net8.0\MusicAPI.sourcelink.json

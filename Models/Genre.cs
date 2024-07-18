@@ -10,6 +10,7 @@ namespace MusicAPI.Models
         [Required]
         public string GenreName { get; set; }
 
+        // Navigation properties
         public ICollection<Music> Music { get; set; }
     }
 }
