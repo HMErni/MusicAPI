@@ -6,15 +6,12 @@ namespace MusicAPI.Data
     {
         bool SaveChanges();
 
-        IEnumerable<Music> GetAll();
+        IEnumerable<Music> GetAllMusic();
 
         Music GetById(int id);
 
         void CreateMusic(Music music);
 
-        void UpdateMusic(Music music);
-
-        void DeleteMusic(int id);
 
     }
 }
